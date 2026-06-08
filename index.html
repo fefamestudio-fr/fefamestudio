@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeFame Studio — Webs que posicionan. Marcas que perduran.</title>
+  <meta name="description" content="FeFame Studio — Agencia de diseño web premium para marcas personales, negocios y creadores. Webs que posicionan. Marcas que perduran.">
+  <meta property="og:title" content="FeFame Studio">
+  <meta property="og:description" content="Webs que posicionan. Marcas que perduran.">
+  <meta property="og:url" content="https://fefamestudio.com">
+  <meta property="og:image" content="https://fefamestudio.com/logo.png">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://fefamestudio.com">
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Serif+Display:ital@0;1&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ───────── VARIABLES ───────── */
+    :root {
+      --bg:          #000000;
+      --bg-2:        #080808;
+      --bg-3:        #0F0F0F;
+      --bg-4:        #141414;
+      --border:      rgba(255, 255, 255, 0.07);
+      --border-2:    rgba(255, 255, 255, 0.12);
+      --text:        #F5F5F5;
+      --text-mid:    #888888;
+      --text-muted:  #444444;
+      --white:       #FFFFFF;
+      --accent:      #FFFFFF;
+
+      --madrid-color:   #C4973A;
+      --ihouse-color:   #0071E3;
+      --miami-color:    #F07E5F;
+      --david-color:    #F5C518;
+      --cucu-color:     #C4A882;
+      --coach-color:    #2D4A3E;
+      --justine-color:  #C4705A;
+      --santa-color:    #D4873A;
+    }
+
+    /* ───────── RESET ───────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+
+    /* ───────── IMAGE FALLBACKS ───────── */
+    .preview-image { background: #1a1a1a; }
+    .nav-logo, .footer-logo { background: transparent; min-width: 36px; min-height: 36px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ───────── SCROLLBAR ───────── */
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+    /* ───────── LANGUAGE TOGGLE ───────── */
+    .en { display: none; }
+    html.lang-en .es { display: none; }
+    html.lang-en .en { display: inline; }
+    html.lang-en .en.block { display: block; }
+    html.lang-en .en.flex { display: flex; }
+    .es.block { display: block; }
+    .es.flex { display: flex; }
+
+    /* ───────── NAV ───────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      z-index: 200;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo {
+      height: 56px;
+      width: 56px;
+      max-width: none;
+      flex-shrink: 0;
+      display: block;
+      object-fit: contain;
+      margin: -12px 0;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-logo-text .name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--white);
+      letter-spacing: 0.15em;
+    }
+    .nav-logo-text .sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-top: 3px;
+    }
+    .nav-center {
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-center a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .nav-center a:hover { color: var(--white); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border-2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 6px 10px;
+      color: var(--text-mid);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lang-toggle button.active {
+      background: var(--white);
+      color: #000;
+    }
+    .nav-cta {
+      background: var(--white);
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 9px 20px;
+      border-radius: 3px;
+      transition: opacity 0.2s ease;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-hamburger span {
+      width: 22px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 190;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--white);
+      letter-spacing: 0.1em;
+    }
+    .mobile-menu-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    /* ───────── HERO ───────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 2rem 2rem;
+      overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      animation: gridDrift 30s linear infinite;
+      will-change: background-position;
+    }
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to   { background-position: 80px 80px; }
+    }
+    .hero-bg-glow {
+      position: absolute;
+      width: 700px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.025) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: glowPulse 5s ease-in-out infinite;
+      will-change: opacity;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; background: radial-gradient(ellipse, rgba(255,255,255,0.015) 0%, transparent 70%); }
+      50%      { opacity: 1;   background: radial-gradient(ellipse, rgba(255,255,255,0.04)  0%, transparent 70%); }
+    }
+    .hero-bg-orb {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 35%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      filter: blur(20px);
+      animation: orbFloat 8s ease-in-out infinite;
+      will-change: transform;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(calc(-50% - 20px), calc(-50% - 15px)); }
+      25%      { transform: translate(calc(-50% + 15px), calc(-50% - 20px)); }
+      50%      { transform: translate(calc(-50% + 20px), calc(-50% + 15px)); }
+      75%      { transform: translate(calc(-50% - 15px), calc(-50% + 20px)); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 920px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border-2);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 18vw, 16rem);
+      color: var(--white);
+      line-height: 0.88;
+      letter-spacing: 2px;
+    }
+    .hero-title .outline {
+      -webkit-text-stroke: 1px rgba(255,255,255,0.18);
+      color: transparent;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.75;
+      margin-top: 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--white);
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 13px 32px;
+      border-radius: 3px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-2);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 13px 32px;
+      border-radius: 3px;
+      transition: border-color 0.25s ease;
+    }
+    .btn-secondary:hover { border-color: #555; }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounce 2s infinite;
+      z-index: 2;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+    .scroll-indicator svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-muted);
+    }
+    .scroll-indicator span {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+    }
+
+    /* ───────── TICKER ───────── */
+    .ticker {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+      height: 48px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 2.5rem;
+      white-space: nowrap;
+      animation: ticker 35s linear infinite;
+    }
+    .ticker-item {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+    }
+    .ticker-sep {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-33.33%); }
+    }
+
+    /* ───────── SECTIONS ───────── */
+    section { position: relative; }
+    .section-padding {
+      padding: 100px 2.5rem;
+    }
+    .section-header {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--white);
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+    .section-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* ───────── PORTFOLIO ───────── */
+    .portfolio { background: var(--bg); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+      background: transparent;
+      border: 1px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow: visible;
+    }
+    .card-scene {
+      position: relative;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      overflow: visible;
+      margin-bottom: 22px;
+    }
+    .project-card {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 10;
+      background: var(--bg-3);
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-left: 1px solid rgba(255,255,255,0.04);
+      border-radius: 6px;
+      transform: rotateX(1.5deg) rotateY(-1deg) translateY(-4px);
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      pointer-events: auto;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  filter 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.4),
+        0 8px 16px rgba(0,0,0,0.35),
+        0 24px 48px rgba(0,0,0,0.3),
+        0 48px 80px rgba(0,0,0,0.2);
+      filter: drop-shadow(0 0 40px rgba(255,255,255,0.03));
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+      z-index: 12;
+      pointer-events: none;
+    }
+    .card-scene:hover .project-card {
+      transform: rotateX(0deg) rotateY(0deg) translateY(-8px) scale(1.015);
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.5),
+        0 16px 32px rgba(0,0,0,0.45),
+        0 36px 64px rgba(0,0,0,0.4),
+        0 64px 110px rgba(0,0,0,0.3);
+      filter: drop-shadow(0 0 60px rgba(255,255,255,0.06));
+    }
+
+    .card-category {
+      position: absolute;
+      top: 38px;
+      left: 14px;
+      z-index: 14;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .card-scene:hover .card-category {
+      opacity: 0.3;
+    }
+
+    .card-label {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0 0 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+      pointer-events: none;
+    }
+    .card-label::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* Browser frame */
+    .browser-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 32px;
+      background: #1a1a1a;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 10px;
+      z-index: 2;
+    }
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .browser-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+    .browser-dots span:nth-child(1) { background: #FF5F56; }
+    .browser-dots span:nth-child(2) { background: #FFBD2E; }
+    .browser-dots span:nth-child(3) { background: #27C93F; }
+    .browser-url {
+      flex: 1;
+      background: #111;
+      border-radius: 4px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    .preview-screen {
+      position: absolute;
+      top: 32px;
+      left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: calc(100% - 32px);
+      min-height: calc(100% - 32px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .preview-screen > * {
+      flex-shrink: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .preview-screen > .preview-fill {
+      flex: 1 1 auto;
+      min-height: 0;
+      height: 100%;
+    }
+    .preview-image {
+      width: 100%;
+      height: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+      z-index: 13;
+      pointer-events: none;
+    }
+    .card-scene:hover .card-overlay {
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .card-info {
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+    .card-scene:hover .card-info {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .card-tag {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-cta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+    }
+    .card-scene:hover .card-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ───────── SERVICES ───────── */
+    .services {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .service-card {
+      position: relative;
+      background: var(--bg-4);
+      padding: 3.5rem;
+      transition: background 0.3s ease;
+    }
+    .service-card:hover { background: var(--bg-3); }
+    .service-card.featured {
+      background: var(--white);
+      color: #000;
+    }
+    .service-card.featured:hover { background: #F5F5F5; }
+    .service-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .service-card.featured .service-number {
+      color: #ddd;
+    }
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .service-card.featured .service-name {
+      color: #000;
+    }
+    .service-desc {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+    .service-card.featured .service-desc {
+      color: #333;
+    }
+    .service-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .service-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--text-mid);
+      border-radius: 50%;
+    }
+    .service-card.featured .service-list li {
+      color: #555;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .service-card.featured .service-list li::before {
+      background: #555;
+    }
+    .service-cta {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.25s ease;
+    }
+    .service-cta:hover { gap: 14px; }
+    .service-card.featured .service-cta { color: #000; }
+    .service-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      padding: 5px 11px;
+      border-radius: 2px;
+    }
+
+    /* ───────── PROCESO ───────── */
+    .process {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .process-row {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .process-row::before {
+      content: '';
+      position: absolute;
+      top: 38px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .process-step {
+      position: relative;
+      z-index: 1;
+      padding: 0 1rem;
+    }
+    .process-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      background: var(--bg);
+      display: inline-block;
+      padding-right: 1rem;
+    }
+    .process-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .process-desc {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ───────── CONTACTO ───────── */
+    .contact {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .contact-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      color: var(--white);
+      letter-spacing: 4px;
+      line-height: 0.9;
+    }
+    .contact-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--text-mid);
+      max-width: 460px;
+      margin: 1.5rem auto 0;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--border-2);
+      border-radius: 4px;
+      padding: 20px 28px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .contact-link:hover {
+      background: var(--bg-4);
+      border-color: #333;
+    }
+    .contact-link svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-mid);
+      flex-shrink: 0;
+    }
+
+    /* ───────── FOOTER ───────── */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-logo {
+      height: 36px;
+      width: 36px;
+      object-fit: contain;
+      margin: -8px 0;
+    }
+    .footer-brand {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .footer-center {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+    .footer-right {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-right a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .footer-right a:hover { color: var(--text-mid); }
+
+    /* ───────── RESPONSIVE ───────── */
+    @media (max-width: 1024px) {
+      .nav { padding: 0 1.5rem; }
+      .section-padding { padding: 80px 1.5rem; }
+      .service-card { padding: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-center { display: none; }
+      .nav-cta { display: none; }
+      .lang-toggle { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav { padding: 0 1.25rem; }
+
+      .hero { padding: 80px 1.25rem 4rem; }
+      .hero-title { letter-spacing: 1px; }
+
+      .portfolio-grid { grid-template-columns: 1fr; padding: 12px; gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .project-card { transform: none; }
+      .card-scene:hover .project-card { transform: translateY(-4px) scale(1.005); }
+
+      .process-row {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .process-row::before { display: none; }
+      .process-step { padding: 0; }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 36px;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .footer-right { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav class="nav">
+    <a href="#hero" class="nav-left" aria-label="FeFame Studio">
+      <img class="nav-logo" src="logo.png" alt="FeFame Studio" />
+      <div class="nav-logo-text">
+        <span class="name" style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.15em;">FEFAME</span>
+        <span class="sub" style="font-family:'Inter',sans-serif;font-weight:500;font-size:9px;color:#444;text-transform:uppercase;letter-spacing:0.25em;margin-top:3px;display:block;">STUDIO</span>
+      </div>
+    </a>
+
+    <div class="nav-center">
+      <a href="#portfolio"><span class="es">Portfolio</span><span class="en">Portfolio</span></a>
+      <a href="#servicios"><span class="es">Servicios</span><span class="en">Services</span></a>
+      <a href="#proceso"><span class="es">Proceso</span><span class="en">Process</span></a>
+      <a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#contacto" class="nav-cta">
+        <span class="es">Contactar</span><span class="en">Contact</span>
+      </a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#portfolio" class="mobile-link"><span class="es">Portfolio</span><span class="en">Portfolio</span></a>
+    <a href="#servicios" class="mobile-link"><span class="es">Servicios</span><span class="en">Services</span></a>
+    <a href="#proceso" class="mobile-link"><span class="es">Proceso</span><span class="en">Process</span></a>
+    <a href="#contacto" class="mobile-link"><span class="es">Contacto</span><span class="en">Contact</span></a>
+    <div class="mobile-menu-bottom">
+      <div class="lang-toggle">
+        <button id="btn-es-m" class="active" onclick="setLang('es')">ES</button>
+        <button id="btn-en-m" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#contacto" class="nav-cta" onclick="closeMobileMenu()">
+        <span class="es">Contactar</span><span class="en">Contact</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-glow"></div>
+    <div class="hero-bg-orb"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="es">Disponible para nuevos proyectos</span>
+        <span class="en">Available for new projects</span>
+      </div>
+
+      <h1 class="hero-title">
+        FEFAME
+        <span class="outline">STUDIO</span>
+      </h1>
+
+      <p class="hero-sub">
+        <span class="es">Diseñamos webs que posicionan marcas y convierten visitantes en clientes.</span>
+        <span class="en">We design websites that position brands and turn visitors into clients.</span>
+      </p>
+
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">
+          <span class="es">Ver proyectos</span><span class="en">View projects</span>
+        </a>
+        <a href="#servicios" class="btn-secondary">
+          <span class="es">Nuestros servicios</span><span class="en">Our services</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+      </svg>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ TICKER ═══════════════ -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item es">Diseño web</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Marca personal</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">E-commerce</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Animaciones</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">GSAP</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Lenis</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">HTML</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">CSS</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">JavaScript</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Premium</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item en">Web design</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Personal brand</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">E-commerce</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Animations</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">GSAP</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Lenis</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">HTML</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">CSS</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">JavaScript</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Premium</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item es">Diseño web</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Marca personal</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">E-commerce</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Animaciones</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">GSAP</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Lenis</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">HTML</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">CSS</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">JavaScript</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Premium</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item en">Web design</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Personal brand</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">E-commerce</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Animations</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">GSAP</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Lenis</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">HTML</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">CSS</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">JavaScript</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Premium</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item es">Diseño web</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Marca personal</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">E-commerce</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Animaciones</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">GSAP</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Lenis</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">HTML</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">CSS</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">JavaScript</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item es">Premium</span><span class="ticker-sep es">·</span>
+      <span class="ticker-item en">Web design</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Personal brand</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">E-commerce</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Animations</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">GSAP</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Lenis</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">HTML</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">CSS</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">JavaScript</span><span class="ticker-sep en">·</span>
+      <span class="ticker-item en">Premium</span><span class="ticker-sep en">·</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ PORTFOLIO ═══════════════ -->
+  <section class="portfolio section-padding" id="portfolio">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <span class="es">Portfolio</span><span class="en">Portfolio</span>
+      </div>
+      <h2 class="section-title">
+        <span class="es">TRABAJO SELECTO</span>
+        <span class="en">SELECTED WORK</span>
+      </h2>
+      <p class="section-sub">
+        <span class="es">8 proyectos. 8 marcas. 8 universos visuales distintos.</span>
+        <span class="en">8 projects. 8 brands. 8 distinct visual universes.</span>
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!-- CARD 1 — MADRID EN RUTA -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Turismo</span><span class="en">Tourism</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">madridenruta.com</div>
+        </div>
+        <div class="preview-screen" style="background: #0D0B09;">
+          <img class="preview-image" src="previews/madrid-en-ruta.png" alt="Madrid en Ruta — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Turismo</span><span class="en">Tourism</span></span>
+            <h3 class="card-name">MADRID EN RUTA</h3>
+            <p class="card-desc es">Tour guiados premium. Oscuro, dorado, atmosférico.</p>
+            <p class="card-desc en">Premium guided tours. Dark, gold, atmospheric.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 2 — IHOUSE CÓRDOBA -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Tech · E-commerce</span><span class="en">Tech · E-commerce</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">ihousecordoba.com.ar</div>
+        </div>
+        <div class="preview-screen" style="background: #F5F5F7;">
+          <img class="preview-image" src="previews/ihouse-cordoba.png" alt="iHouse Córdoba — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Tech · E-commerce</span><span class="en">Tech · E-commerce</span></span>
+            <h3 class="card-name">iHOUSE CÓRDOBA</h3>
+            <p class="card-desc es">Reseller Apple. Light mode, bento grid, azul Apple.</p>
+            <p class="card-desc en">Apple reseller. Light mode, bento grid, Apple blue.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 3 — UP MIDTOWN MIAMI -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Hospitalidad</span><span class="en">Hospitality</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">wishesbiscaynemotel.us</div>
+        </div>
+        <div class="preview-screen" style="background: #09090E;">
+          <img class="preview-image" src="previews/up-midtown.png" alt="Up Midtown Miami — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Hospitalidad</span><span class="en">Hospitality</span></span>
+            <h3 class="card-name">UP MIDTOWN MIAMI</h3>
+            <p class="card-desc es">Hotel boutique. Noir, coral, editorial.</p>
+            <p class="card-desc en">Boutique hotel. Noir, coral, editorial.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 4 — DAVID SOTO -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Fitness · Coaching</span><span class="en">Fitness · Coaching</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">davidsoto.com</div>
+        </div>
+        <div class="preview-screen" style="background: #080808;">
+          <img class="preview-image" src="previews/david-soto.png" alt="David Soto — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Fitness · Coaching</span><span class="en">Fitness · Coaching</span></span>
+            <h3 class="card-name">DAVID SOTO</h3>
+            <p class="card-desc es">Entrenador personal. Dark athletic, amarillo eléctrico.</p>
+            <p class="card-desc en">Personal trainer. Dark athletic, electric yellow.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 5 — CUCÚ STUDIO -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Tattoo · Arte</span><span class="en">Tattoo · Art</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">cucu-studio.com</div>
+        </div>
+        <div class="preview-screen" style="background: #0A0A0A;">
+          <img class="preview-image" src="previews/cucu-studio.png" alt="Cucú Studio — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Tattoo · Arte</span><span class="en">Tattoo · Art</span></span>
+            <h3 class="card-name">CUCÚ STUDIO</h3>
+            <p class="card-desc es">Tattoo premium en Buenos Aires. Fine art, crema dorada.</p>
+            <p class="card-desc en">Premium tattoo in Buenos Aires. Fine art, golden cream.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 6 — COACH NUTRICIONAL -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Nutrición · Wellness</span><span class="en">Nutrition · Wellness</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">elcoachnutricional.com</div>
+        </div>
+        <div class="preview-screen" style="background: #FAFAF8;">
+          <img class="preview-image" src="previews/elcoachnutricional.png" alt="El Coach Nutricional — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Nutrición · Wellness</span><span class="en">Nutrition · Wellness</span></span>
+            <h3 class="card-name">COACH NUTRICIONAL</h3>
+            <p class="card-desc es">Nutricionista online. Light mode, verde, conversión.</p>
+            <p class="card-desc en">Online nutritionist. Light mode, green, conversion.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 7 — JUSTINE STANDAERT -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Marca personal</span><span class="en">Personal brand</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">justinestandaert.com</div>
+        </div>
+        <div class="preview-screen" style="background: #080810;">
+          <img class="preview-image" src="previews/justine-standaert.png" alt="Justine Standaert — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Marca personal</span><span class="en">Personal brand</span></span>
+            <h3 class="card-name">JUSTINE STANDAERT</h3>
+            <p class="card-desc es">Coach de negocios. Marca personal oscura, terracota.</p>
+            <p class="card-desc en">Business coach. Dark personal brand, terracotta.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+      <!-- CARD 8 — SANTACOACH -->
+      <div class="card-scene">
+      <a class="project-card" href="#" target="_blank" rel="noopener"> <!-- TODO: pegar URL de Vercel -->
+        <div class="card-category"><span class="es">Marca personal</span><span class="en">Personal brand</span></div>
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">santacoach.com</div>
+        </div>
+        <div class="preview-screen" style="background: #080606;">
+          <img class="preview-image" src="previews/santacoach.png" alt="Santacoach — Vista previa" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-info">
+            <span class="card-tag"><span class="es">Marca personal</span><span class="en">Personal brand</span></span>
+            <h3 class="card-name">SANTACOACH</h3>
+            <p class="card-desc es">Coach de vida y negocios. Marca personal, ámbar latino.</p>
+            <p class="card-desc en">Life & business coach. Personal brand, latin amber.</p>
+          </div>
+          <div class="card-cta">
+            <span class="es">Ver proyecto →</span>
+            <span class="en">View project →</span>
+          </div>
+        </div>
+      </a>
+      <div class="card-label">Case Study</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ SERVICIOS ═══════════════ -->
+  <section class="services section-padding" id="servicios">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <span class="es">Servicios</span><span class="en">Services</span>
+      </div>
+      <h2 class="section-title">
+        <span class="es">LO QUE HACEMOS</span>
+        <span class="en">WHAT WE DO</span>
+      </h2>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card featured">
+        <div class="service-badge">
+          <span class="es">Más pedido</span><span class="en">Most requested</span>
+        </div>
+        <div class="service-number">01</div>
+        <h3 class="service-name">
+          <span class="es">WEB DESDE CERO</span>
+          <span class="en">WEBSITE FROM SCRATCH</span>
+        </h3>
+        <p class="service-desc">
+          <span class="es">Investigamos tu marca, diseñamos tu identidad digital y construimos un sitio que te representa. Desde la primera línea de código hasta el deploy.</span>
+          <span class="en">We research your brand, design your digital identity and build a site that represents you. From the first line of code to the deploy.</span>
+        </p>
+        <ul class="service-list">
+          <li><span class="es">Investigación de marca</span><span class="en">Brand research</span></li>
+          <li><span class="es">Diseño personalizado</span><span class="en">Custom design</span></li>
+          <li><span class="es">Animaciones premium</span><span class="en">Premium animations</span></li>
+          <li><span class="es">Mobile first</span><span class="en">Mobile first</span></li>
+          <li><span class="es">Deploy incluido</span><span class="en">Deploy included</span></li>
+        </ul>
+        <a href="#contacto" class="service-cta">
+          <span class="es">Consultar →</span><span class="en">Inquire →</span>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 class="service-name">
+          <span class="es">REDISEÑO</span>
+          <span class="en">REDESIGN</span>
+        </h3>
+        <p class="service-desc">
+          <span class="es">Tu web existe pero no te representa. La renovamos desde la estructura hasta el último pixel, manteniendo lo que funciona y mejorando lo que frena.</span>
+          <span class="en">Your site exists but doesn't represent you. We renew it from structure to the last pixel, keeping what works and improving what holds you back.</span>
+        </p>
+        <ul class="service-list">
+          <li><span class="es">Auditoría del sitio actual</span><span class="en">Audit of current site</span></li>
+          <li><span class="es">Nuevo diseño visual</span><span class="en">New visual design</span></li>
+          <li><span class="es">Optimización de velocidad</span><span class="en">Speed optimization</span></li>
+          <li><span class="es">SEO básico</span><span class="en">Basic SEO</span></li>
+        </ul>
+        <a href="#contacto" class="service-cta">
+          <span class="es">Consultar →</span><span class="en">Inquire →</span>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 class="service-name">
+          <span class="es">MARCA PERSONAL</span>
+          <span class="en">PERSONAL BRAND</span>
+        </h3>
+        <p class="service-desc">
+          <span class="es">Para creadores, coaches y profesionales que necesitan una web que los diferencie y convierta su audiencia en clientes.</span>
+          <span class="en">For creators, coaches and professionals who need a website that sets them apart and turns their audience into clients.</span>
+        </p>
+        <ul class="service-list">
+          <li><span class="es">Instagram card animada</span><span class="en">Animated Instagram card</span></li>
+          <li><span class="es">Historia personal</span><span class="en">Personal story</span></li>
+          <li><span class="es">Métricas de comunidad</span><span class="en">Community metrics</span></li>
+          <li><span class="es">Formulario de contacto</span><span class="en">Contact form</span></li>
+        </ul>
+        <a href="#contacto" class="service-cta">
+          <span class="es">Consultar →</span><span class="en">Inquire →</span>
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3 class="service-name">
+          <span class="es">MANTENIMIENTO</span>
+          <span class="en">MAINTENANCE</span>
+        </h3>
+        <p class="service-desc">
+          <span class="es">Tu web vive y cambia. Actualizaciones de contenido, mejoras de rendimiento y soporte técnico cuando lo necesitás.</span>
+          <span class="en">Your website lives and changes. Content updates, performance improvements and technical support when you need it.</span>
+        </p>
+        <ul class="service-list">
+          <li><span class="es">Actualizaciones de contenido</span><span class="en">Content updates</span></li>
+          <li><span class="es">Hosting y dominio</span><span class="en">Hosting and domain</span></li>
+          <li><span class="es">Soporte técnico</span><span class="en">Technical support</span></li>
+          <li><span class="es">Reportes mensuales</span><span class="en">Monthly reports</span></li>
+        </ul>
+        <a href="#contacto" class="service-cta">
+          <span class="es">Consultar →</span><span class="en">Inquire →</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ PROCESO ═══════════════ -->
+  <section class="process section-padding" id="proceso">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <span class="es">Proceso</span><span class="en">Process</span>
+      </div>
+      <h2 class="section-title">
+        <span class="es">CÓMO TRABAJAMOS</span>
+        <span class="en">HOW WE WORK</span>
+      </h2>
+    </div>
+
+    <div class="process-row">
+      <div class="process-step">
+        <div class="process-number">01</div>
+        <h4 class="process-title"><span class="es">Investigación</span><span class="en">Research</span></h4>
+        <p class="process-desc">
+          <span class="es">Estudiamos tu marca, tu competencia y tu audiencia objetivo.</span>
+          <span class="en">We study your brand, your competition and your target audience.</span>
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">02</div>
+        <h4 class="process-title"><span class="es">Diseño</span><span class="en">Design</span></h4>
+        <p class="process-desc">
+          <span class="es">Proponemos el concepto visual. Iteramos hasta que sea exactamente lo que imaginabas.</span>
+          <span class="en">We propose the visual concept. We iterate until it's exactly what you imagined.</span>
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">03</div>
+        <h4 class="process-title"><span class="es">Desarrollo</span><span class="en">Build</span></h4>
+        <p class="process-desc">
+          <span class="es">Construimos cada sección con código limpio y animaciones premium.</span>
+          <span class="en">We build every section with clean code and premium animations.</span>
+        </p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">04</div>
+        <h4 class="process-title"><span class="es">Entrega</span><span class="en">Launch</span></h4>
+        <p class="process-desc">
+          <span class="es">Deploy, dominio y transferencia del proyecto. Cero fricción.</span>
+          <span class="en">Deploy, domain and project handoff. Zero friction.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CONTACTO ═══════════════ -->
+  <section class="contact section-padding" id="contacto">
+    <h2 class="contact-title">
+      <span class="es">EMPECEMOS</span>
+      <span class="en">LET'S START</span>
+    </h2>
+    <p class="contact-sub">
+      <span class="es">Contanos tu proyecto. Te respondemos en menos de 24 horas.</span>
+      <span class="en">Tell us about your project. We'll reply within 24 hours.</span>
+    </p>
+
+    <div class="contact-links">
+      <a href="mailto:fefamestudio@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>fefamestudio@gmail.com</span>
+      </a>
+      <a href="https://instagram.com/fefame.studio" target="_blank" rel="noopener" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <span>@fefame.studio</span>
+      </a>
+      <a href="https://fefamestudio.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span>fefamestudio.com</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="footer-left">
+      <img class="footer-logo" src="logo.png" alt="FeFame Studio" />
+      <span class="footer-brand">FEFAME STUDIO</span>
+    </div>
+    <div class="footer-center">© 2026 FeFame Studio</div>
+    <div class="footer-right">
+      <a href="https://instagram.com/fefame.studio" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:fefamestudio@gmail.com">Email</a>
+      <a href="#hero">fefamestudio.com</a>
+    </div>
+  </footer>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script>
+    // ── LANGUAGE TOGGLE ──
+    function setLang(lang) {
+      document.documentElement.className = lang === 'en' ? 'lang-en' : '';
+      ['btn-es','btn-es-m'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', lang === 'es');
+      });
+      ['btn-en','btn-en-m'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', lang === 'en');
+      });
+      localStorage.setItem('fefame-lang', lang);
+    }
+    const savedLang = localStorage.getItem('fefame-lang');
+    if (savedLang === 'en') setLang('en');
+
+    // ── MOBILE MENU ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function closeMobileMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(a => {
+      a.addEventListener('click', closeMobileMenu);
+    });
+
+    // ── SMOOTH ANCHOR SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.length > 1) {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const offset = target.getBoundingClientRect().top + window.scrollY - 60;
+            if (window.lenis) {
+              window.lenis.scrollTo(offset, { duration: 1.2 });
+            } else {
+              window.scrollTo({ top: offset, behavior: 'smooth' });
+            }
+          }
+        }
+      });
+    });
+
+    // ── LENIS ──
+    try {
+      const lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+      });
+      window.lenis = lenis;
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    } catch(e) {
+      console.warn('Lenis no disponible, usando scroll nativo.');
+    }
+
+    // ── GSAP ──
+    if (typeof gsap === 'undefined') { console.warn('GSAP no disponible.'); }
+    else {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // HERO
+    gsap.from('.hero-badge',   { opacity: 0, y: 14, duration: 0.6, delay: 0.2, ease: 'power3.out' });
+    gsap.from('.hero-title',   { opacity: 0, y: 48, duration: 1.0, delay: 0.35, ease: 'power3.out' });
+    gsap.from('.hero-sub',     { opacity: 0, y: 28, duration: 0.8, delay: 0.55, ease: 'power3.out' });
+    gsap.from('.hero-actions', { opacity: 0, y: 18, duration: 0.7, delay: 0.70, ease: 'power3.out' });
+
+    if (window.innerWidth > 768) {
+      gsap.from('.card-scene', {
+        scrollTrigger: { trigger: '.portfolio-grid', start: 'top 82%', toggleActions: 'play none none none' },
+        opacity: 0, y: 40, duration: 0.7, ease: 'power3.out', stagger: 0.08
+      });
+      gsap.from('.service-card', {
+        scrollTrigger: { trigger: '.services-grid', start: 'top 82%', toggleActions: 'play none none none' },
+        opacity: 0, y: 30, duration: 0.6, ease: 'power2.out', stagger: 0.10
+      });
+      gsap.from('.process-step', {
+        scrollTrigger: { trigger: '.process-row', start: 'top 85%', toggleActions: 'play none none none' },
+        opacity: 0, y: 24, duration: 0.6, ease: 'power2.out', stagger: 0.14
+      });
+      gsap.from('.contact-link', {
+        scrollTrigger: { trigger: '.contact-links', start: 'top 88%', toggleActions: 'play none none none' },
+        opacity: 0, y: 20, duration: 0.5, ease: 'power2.out', stagger: 0.12
+      });
+      gsap.utils.toArray('.section-eyebrow, .section-title').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          opacity: 0, y: 30, duration: 0.7, ease: 'power3.out'
+        });
+      });
+    } else {
+      gsap.utils.toArray('.card-scene, .service-card, .process-step, .section-title, .contact-link').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 93%', toggleActions: 'play none none none' },
+          opacity: 0, y: 18, duration: 0.5, ease: 'power2.out'
+        });
+      });
+    }
+
+    } // end gsap block
+
+    // ── CARD PARALLAX (desktop only) ──
+    if (typeof gsap !== 'undefined' && window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.card-scene').forEach(scene => {
+        const card = scene.querySelector('.project-card');
+        if (!card) return;
+        scene.addEventListener('mousemove', (e) => {
+          const rect = scene.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotX = (-y * 6).toFixed(2);
+          const rotY = (x * 6).toFixed(2);
+          card.style.transition = 'transform 0.15s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1), filter 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+          card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px) scale(1.015)`;
+        });
+        scene.addEventListener('mouseleave', () => {
+          card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1), filter 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+          card.style.transform = 'rotateX(1.5deg) rotateY(-1deg) translateY(-4px) scale(1)';
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
